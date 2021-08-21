@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## Node.js模组 Node.js moudle
+## Node.js moudle
 
 install_nodejs(){
 	set +e
