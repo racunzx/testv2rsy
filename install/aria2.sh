@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
 
-## Aria2模组 Aria2 moudle
+## Aria2 moudle
 
 #---Author Info---
 ver="1.0.0"
 Author="johnrosen1"
-url="https://johnrosen1.com/"
-github_url="https://github.com/johnrosen1/vpstoolbox"
 #-----------------
 
 install_aria2(){
-TERM=ansi whiptail --title "安装中" --infobox "安装Aria2中..." 7 68
+TERM=ansi whiptail --title "Installing" --infobox "Install Aria2..." 7 68
 trackers_list=$(wget --no-check-certificate -qO- https://trackerslist.com/all_aria2.txt)
 ariaport=$(shuf -i 13000-19000 -n 1)
 mkdir /etc/aria2/
@@ -125,7 +123,7 @@ curl -LO https://github.com/mayswind/AriaNg/releases/download/1.1.7/AriaNg-1.1.7
 unzip *
 rm -rf *.zip
 cd
-TERM=ansi whiptail --title "安装中" --infobox "拉取全自动Aria2上传脚本中..." 7 68
+TERM=ansi whiptail --title "Installing" --infobox "Pull the automatic Aria2 upload script..." 7 68
 cd /etc/aria2/
 curl -LO https://raw.githubusercontent.com/johnrosen1/vpstoolbox/master/install/autoupload.sh
 chmod +x /etc/aria2/autoupload.sh
