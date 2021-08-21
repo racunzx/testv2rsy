@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## Dnscrypt-proxy模组 Dnscrypt-proxy moudle
+## Dnscrypt-proxy moudle
 
 install_dnscrypt(){
   set +e
@@ -131,7 +131,7 @@ systemctl daemon-reload
 systemctl enable dnscrypt-proxy
 systemctl restart dnscrypt-proxy
 clear
-TERM=ansi whiptail --title "安装中" --infobox "安装Dnscrypt-proxy中..." 7 68
+TERM=ansi whiptail --title "Installing" --infobox "Install Dnscrypt-proxy Agent..." 7 68
 colorEcho ${INFO} "Install dnscrypt-proxy ing"
 if [[ $(systemctl is-active dnsmasq) == active ]]; then
   systemctl disable dnsmasq
