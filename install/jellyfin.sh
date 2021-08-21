@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## JellyFin模组 Jellyfin moudle
+## Jellyfin moudle
 
 # *:8096 port
 
