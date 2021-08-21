@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-## PHP模组 PHP moudle
+## PHP moudle
 
 install_php(){
   clear
-TERM=ansi whiptail --title "安装中" --infobox "安装PHP中..." 7 68
+TERM=ansi whiptail --title "Installing" --infobox "Install PHP..." 7 68
 colorEcho ${INFO} "Install PHP ing"
 apt-get purge php* -y
 mkdir /usr/log/
