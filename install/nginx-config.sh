@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## Nginx config模组 Nginx moudle
+## Nginx config moudle
 
 nginx_config(){
   set +e
@@ -157,57 +157,6 @@ echo "        proxy_set_header Connection "upgrade";" >> /etc/nginx/conf.d/defau
 echo "        proxy_set_header X-Forward-Proto https;" >> /etc/nginx/conf.d/default.conf
 echo "        }" >> /etc/nginx/conf.d/default.conf
 fi
-if [[ $install_trojan_panel == 1 ]]; then
-echo "    location /config/ {" >> /etc/nginx/conf.d/default.conf
-echo "        expires -1;" >> /etc/nginx/conf.d/default.conf
-echo "        client_max_body_size 0;" >> /etc/nginx/conf.d/default.conf
-echo "        index index.php;" >> /etc/nginx/conf.d/default.conf
-echo "        #http2_push /${password1}_config/css/app.css;" >> /etc/nginx/conf.d/default.conf
-echo "        #http2_push /${password1}_config/js/app.js;" >> /etc/nginx/conf.d/default.conf
-echo "        alias /usr/share/nginx/trojan-panel/public/;" >> /etc/nginx/conf.d/default.conf
-echo "        try_files \$uri \$uri/ @config;" >> /etc/nginx/conf.d/default.conf
-echo "        location ~ \.php\$ {" >> /etc/nginx/conf.d/default.conf
-echo "        fastcgi_split_path_info ^(.+\.php)(/.+)\$;" >> /etc/nginx/conf.d/default.conf
-echo "        include fastcgi_params;" >> /etc/nginx/conf.d/default.conf
-echo "        fastcgi_pass unix:/run/php/php7.4-fpm.sock;" >> /etc/nginx/conf.d/default.conf
-echo "        fastcgi_param HTTPS on;" >> /etc/nginx/conf.d/default.conf
-echo "        fastcgi_index index.php;" >> /etc/nginx/conf.d/default.conf
-echo "        fastcgi_param SCRIPT_FILENAME \$request_filename;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "        location @config {" >> /etc/nginx/conf.d/default.conf
-echo "        rewrite /config/(.*)\$ /config/index.php?/\$1 last;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "    location /config {" >> /etc/nginx/conf.d/default.conf
-echo "        return 301 https://${domain}/config/;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-fi
-if [[ $install_rocketchat == 1 ]]; then
-echo "    location /rocketchat {" >> /etc/nginx/conf.d/default.conf
-echo "        expires -1;" >> /etc/nginx/conf.d/default.conf
-echo "        client_max_body_size 0;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_no_cache 1;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_cache_bypass 1;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_set_header Upgrade \$http_upgrade;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_set_header Connection "upgrade";" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_set_header X-Forward-Proto https;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_set_header X-Nginx-Proxy true;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_pass http://127.0.0.1:3000/rocketchat;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_redirect off;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "        location /file-upload/ {" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_pass http://127.0.0.1:3000/rocketchat/file-upload/;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "        location /avatar/ {" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_pass http://127.0.0.1:3000/rocketchat/avatar/;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "        location /assets/ {" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_pass http://127.0.0.1:3000/rocketchat/assets/;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "        location /home {" >> /etc/nginx/conf.d/default.conf
-echo "        return 301 https://${domain}/rocketchat/home/;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-fi
 if [[ $install_mail == 1 ]]; then
 echo "    location /mail/ {" >> /etc/nginx/conf.d/default.conf
 echo "        #access_log off;" >> /etc/nginx/conf.d/default.conf
@@ -268,26 +217,6 @@ echo "        deny all;" >> /etc/nginx/conf.d/default.conf
 echo "        }" >> /etc/nginx/conf.d/default.conf
 echo "    location /ttrss/config.php {" >> /etc/nginx/conf.d/default.conf
 echo "        deny all;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-fi
-if [[ $install_aria == 1 ]]; then
-echo "    location $ariapath {" >> /etc/nginx/conf.d/default.conf
-echo "        #access_log off;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_redirect off;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_pass http://127.0.0.1:6800/jsonrpc;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-echo "    location /ariang/ {" >> /etc/nginx/conf.d/default.conf
-echo "        expires -1;" >> /etc/nginx/conf.d/default.conf
-echo "        client_max_body_size 0;" >> /etc/nginx/conf.d/default.conf
-echo "        index index.html;" >> /etc/nginx/conf.d/default.conf
-echo "        alias /usr/share/nginx/ariang/;" >> /etc/nginx/conf.d/default.conf
-echo "        }" >> /etc/nginx/conf.d/default.conf
-fi
-if [[ $install_qbt_e == 1 ]] || [[ $install_qbt_o == 1 ]]; then
-echo "    location /qbt/ {" >> /etc/nginx/conf.d/default.conf
-echo "        #access_log off;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_pass              http://127.0.0.1:8080/;" >> /etc/nginx/conf.d/default.conf
-echo "        proxy_set_header        X-Forwarded-Host        \$http_host;" >> /etc/nginx/conf.d/default.conf
 echo "        }" >> /etc/nginx/conf.d/default.conf
 fi
 if [[ $install_filebrowser == 1 ]]; then
